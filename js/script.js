@@ -1,0 +1,126 @@
+/**
+ * HENRIQUE COSTA ESPAÇO - JAVASCRIPT
+ * Interactions: Navigation, Mobile Drawer, WhatsApp Integration & Strategic Pre-Booking Form
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.site-header');
+  const mobileToggle = document.getElementById('mobileToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const bookingForm = document.getElementById('preBookingForm');
+
+  const WHATSAPP_PHONE = '5521988286774';
+
+  /* --------------------------------------------------------------------------
+     1. STICKY HEADER SCROLL SHADOW
+     -------------------------------------------------------------------------- */
+  const handleScroll = () => {
+    if (window.scrollY > 30) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  /* --------------------------------------------------------------------------
+     2. MOBILE MENU DRAWER
+     -------------------------------------------------------------------------- */
+  if (mobileToggle && navMenu) {
+    mobileToggle.addEventListener('click', () => {
+      const isActive = navMenu.classList.toggle('is-active');
+      mobileToggle.classList.toggle('is-active');
+      mobileToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('is-active');
+        mobileToggle.classList.remove('is-active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('is-active')) {
+        navMenu.classList.remove('is-active');
+        mobileToggle.classList.remove('is-active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     3. STRATEGIC PRE-BOOKING FORM -> DIRECT WHATSAPP CONVERSION
+     -------------------------------------------------------------------------- */
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('bookingName');
+      const phoneInput = document.getElementById('bookingPhone');
+      const serviceSelect = document.getElementById('bookingService');
+      const periodSelect = document.getElementById('bookingPeriod');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const service = serviceSelect ? serviceSelect.value : 'Corte e Visagismo';
+      const period = periodSelect ? periodSelect.value : 'Qualquer horário';
+
+      if (!name || !phone) {
+        alert('Por favor, preencha seu nome e WhatsApp para prosseguirmos.');
+        return;
+      }
+
+      // Build personalized booking message
+      const message = `Olá, Henrique! Gostaria de solicitar um pré-agendamento no Henrique Costa Espaço:
+
+• Nome: ${name}
+• WhatsApp: ${phone}
+• Serviço Desejado: ${service}
+• Preferência de Horário: ${period}
+
+Como podemos confirmar o melhor horário?`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
+
+      // Open WhatsApp directly
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     4. ACTIVE LINK HIGHLIGHT ON SCROLL
+     -------------------------------------------------------------------------- */
+  const sections = document.querySelectorAll('section[id]');
+  if ('IntersectionObserver' in window && sections.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0,
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const currentId = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${currentId}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
+});

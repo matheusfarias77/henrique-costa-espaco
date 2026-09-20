@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140" width="100%" height="100%">
+  <defs>
+    <!-- Gold Gradient for Hair Strand & Accents -->
+    <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EED793" />
+      <stop offset="40%" stop-color="#C5A059" />
+      <stop offset="75%" stop-color="#A57E2F" />
+      <stop offset="100%" stop-color="#84601A" />
+    </linearGradient>
+
+    <!-- Silver / Champagne Gradient for Second Strand -->
+    <linearGradient id="silverRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E6E8EA" />
+      <stop offset="50%" stop-color="#BFC3C7" />
+      <stop offset="100%" stop-color="#8D9399" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#C5A059" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(130, 2)" filter="url(#softGlow)">
+    <!-- Central Monogram H Pillar Left -->
+    <rect x="68" y="4" width="10" height="38" rx="2" fill="#222222" opacity="0.9" />
+    <!-- Monogram H Pillar Right -->
+    <rect x="122" y="4" width="10" height="38" rx="2" fill="#222222" opacity="0.9" />
+
+    <!-- Silver Wave Strand -->
+    <path d="M 60 27 C 78 27, 95 38, 120 34 C 134 31, 144 23, 148 18 C 143 25, 130 36, 115 37 C 90 39, 74 31, 58 31 Z" fill="url(#silverRibbon)" />
+
+    <!-- Gold Fluid Hair Strand -->
+    <path d="M 52 23 C 58 16, 74 15, 88 18 C 105 22, 118 31, 136 26 C 145 23, 149 18, 150 16 C 148 24, 134 34, 116 32 C 98 29, 84 18, 66 18 C 58 18, 54 21, 52 23 Z" fill="url(#goldRibbon)" />
+  </g>
+
+  <!-- Typography: HENRIQUE COSTA -->
+  <text x="230" y="86" text-anchor="middle" font-family="'Montserrat', 'Cinzel', sans-serif" font-size="28" font-weight="700" letter-spacing="4" fill="#141414">
+    HENRIQUE COSTA
+  </text>
+
+  <!-- Typography: E S P A Ç O -->
+  <text x="230" y="118" text-anchor="middle" font-family="'Montserrat', 'Cinzel', sans-serif" font-size="14" font-weight="500" letter-spacing="14" fill="#B89038">
+    ESPAÇO
+  </text>
+</svg>
