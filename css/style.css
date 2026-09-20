@@ -416,7 +416,7 @@ button, input, select, textarea {
   overflow: hidden;
 }
 
-/* Camada fotográfica decorativa (estática, sem interceptar cliques) */
+/* Camada fotográfica decorativa com zoom sutil e elegante */
 .hero-bg-layer {
   position: absolute;
   inset: 0;
@@ -437,14 +437,85 @@ button, input, select, textarea {
   object-position: 55% 25%; /* Recorte dos fios e mechas iluminadas no desktop */
   pointer-events: none;
   display: block;
+  transform: scale(1.02);
+  transform-origin: center center;
+  will-change: transform;
+  animation: heroBackgroundZoom 18s ease-in-out infinite alternate;
 }
 
-/* Camada marfim #F5F1E9 a 87% de opacidade sobre a foto */
+@keyframes heroBackgroundZoom {
+  0% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1.07);
+  }
+}
+
+/* Estado pausado da animação de fundo */
+.hero-bg-img.is-paused {
+  animation-play-state: paused !important;
+}
+
+/* Camada marfim #F5F1E9 fixa com ~90% de opacidade sobre a foto */
 .hero-bg-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(245, 241, 233, 0.87);
+  background-color: rgba(245, 241, 233, 0.90);
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Controle discreto e acessível para pausar/retomar animação de fundo */
+.hero-motion-control {
+  position: absolute;
+  bottom: 1.25rem;
+  right: clamp(1.25rem, 3.5vw, 2.5rem);
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.hero-pause-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #4A4A4A;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-pause-btn:hover {
+  background: #FFFFFF;
+  border-color: var(--gold-primary);
+  color: var(--gold-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.15);
+}
+
+.hero-pause-btn:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
+.hero-pause-btn svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.pause-btn-text {
+  font-size: 0.72rem;
+  line-height: 1;
 }
 
 /* Conteúdo da Hero Centralizado */
@@ -1206,6 +1277,15 @@ button, input, select, textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-bg-img {
+    animation: none !important;
+    transform: scale(1.02) !important;
+  }
+
+  .hero-motion-control {
+    display: none !important;
+  }
+
   .hero-content,
   .hero-text .eyebrow-tag,
   .hero-title,
@@ -1407,9 +1487,33 @@ button, input, select, textarea {
     box-sizing: border-box !important;
   }
 
-  /* Enquadramento da foto decorativa no mobile: foco nos fios e mechas */
+  /* Enquadramento e amplitude de zoom reduzida no mobile: scale(1.02) até scale(1.04) */
+  @keyframes heroBackgroundZoomMobile {
+    0% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1.04);
+    }
+  }
+
   .hero-bg-img {
     object-position: 60% 20% !important;
+    animation: heroBackgroundZoomMobile 18s ease-in-out infinite alternate !important;
+  }
+
+  .hero-bg-img.is-paused {
+    animation-play-state: paused !important;
+  }
+
+  .hero-motion-control {
+    bottom: 0.85rem !important;
+    right: 1.15rem !important;
+  }
+
+  .hero-pause-btn {
+    padding: 0.28rem 0.65rem !important;
+    font-size: 0.68rem !important;
   }
 
   .hero-content {

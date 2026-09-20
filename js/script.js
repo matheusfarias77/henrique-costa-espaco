@@ -146,4 +146,82 @@ Como podemos confirmar o melhor horário?`;
   } else {
     revealElements.forEach((el) => el.classList.add('is-revealed'));
   }
+
+  /* --------------------------------------------------------------------------
+     6. HERO BACKGROUND DISCREET ZOOM ANIMATION & ACCESSIBLE CONTROLS
+     -------------------------------------------------------------------------- */
+  const heroSection = document.querySelector('.hero-section');
+  const heroBgImg = document.getElementById('heroBgImg');
+  const heroPauseBtn = document.getElementById('heroPauseBtn');
+  const pauseBtnText = document.getElementById('pauseBtnText');
+
+  if (heroBgImg && heroPauseBtn) {
+    const iconPause = heroPauseBtn.querySelector('.icon-pause');
+    const iconPlay = heroPauseBtn.querySelector('.icon-play');
+    let isManuallyPaused = false;
+    let isIntersecting = true;
+    let isTabVisible = !document.hidden;
+
+    // Respeitar prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      heroBgImg.classList.add('is-paused');
+      heroPauseBtn.setAttribute('aria-pressed', 'true');
+      if (iconPause) iconPause.style.display = 'none';
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (pauseBtnText) pauseBtnText.textContent = 'Animar fundo';
+      heroPauseBtn.setAttribute('aria-label', 'Retomar animação de fundo');
+      isManuallyPaused = true;
+    }
+
+    const updateAnimationState = () => {
+      if (isManuallyPaused || !isIntersecting || !isTabVisible) {
+        heroBgImg.classList.add('is-paused');
+      } else {
+        heroBgImg.classList.remove('is-paused');
+      }
+    };
+
+    // Controle acessível por clique / teclado
+    heroPauseBtn.addEventListener('click', () => {
+      isManuallyPaused = !isManuallyPaused;
+      heroPauseBtn.setAttribute('aria-pressed', isManuallyPaused ? 'true' : 'false');
+
+      if (isManuallyPaused) {
+        if (iconPause) iconPause.style.display = 'none';
+        if (iconPlay) iconPlay.style.display = 'block';
+        if (pauseBtnText) pauseBtnText.textContent = 'Animar fundo';
+        heroPauseBtn.setAttribute('aria-label', 'Retomar animação de fundo');
+        heroPauseBtn.setAttribute('title', 'Retomar animação de fundo');
+      } else {
+        if (iconPause) iconPause.style.display = 'block';
+        if (iconPlay) iconPlay.style.display = 'none';
+        if (pauseBtnText) pauseBtnText.textContent = 'Pausar fundo';
+        heroPauseBtn.setAttribute('aria-label', 'Pausar animação de fundo');
+        heroPauseBtn.setAttribute('title', 'Pausar animação de fundo');
+      }
+
+      updateAnimationState();
+    });
+
+    // Pausar quando a hero estiver fora da tela (IntersectionObserver)
+    if ('IntersectionObserver' in window && heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isIntersecting = entry.isIntersecting;
+          updateAnimationState();
+        });
+      }, {
+        root: null,
+        threshold: 0.05
+      });
+      heroObserver.observe(heroSection);
+    }
+
+    // Pausar quando a aba estiver oculta (Page Visibility API)
+    document.addEventListener('visibilitychange', () => {
+      isTabVisible = !document.hidden;
+      updateAnimationState();
+    });
+  }
 });

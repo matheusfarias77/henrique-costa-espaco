@@ -74,7 +74,7 @@
     <section class="hero-section" id="inicio">
       <!-- Decorative Photographic Background & Ivory Overlay Layer -->
       <div class="hero-bg-layer" aria-hidden="true">
-        <img src="assets/images/hero-bg.jpg" alt="" class="hero-bg-img" fetchpriority="high" loading="eager">
+        <img src="assets/images/hero-bg.jpg" alt="" class="hero-bg-img" id="heroBgImg" fetchpriority="high" loading="eager">
         <div class="hero-bg-overlay"></div>
       </div>
 
@@ -107,6 +107,25 @@
             </a>
           </div>
         </div>
+      </div>
+
+      <!-- Controle Discreto & Acessível de Animação de Fundo -->
+      <div class="hero-motion-control">
+        <button type="button" 
+                class="hero-pause-btn" 
+                id="heroPauseBtn" 
+                aria-label="Pausar animação de fundo" 
+                aria-pressed="false"
+                title="Pausar animação de fundo">
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+          <svg class="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span class="pause-btn-text" id="pauseBtnText">Pausar fundo</span>
+        </button>
       </div>
     </section>
 
