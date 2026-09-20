@@ -9,15 +9,15 @@
   /* Clean Background Palette */
   --bg-body: #FAF9F6;
   --bg-white: #FFFFFF;
-  --bg-surface: #F5F4EF;
+  --bg-surface: #FAF8F5;
   --bg-surface-card: #FFFFFF;
   --bg-glass-header: rgba(250, 249, 246, 0.96);
 
-  /* Typography Colors */
-  --text-primary: #121212;
+  /* Typography Colors (High Contrast) */
+  --text-primary: #1A1A1A;
   --text-secondary: #2C2C2C;
-  --text-muted: #666666;
-  --text-light: #888888;
+  --text-muted: #555555;
+  --text-light: #6A6A6A;
 
   /* Brushed Gold Accents */
   --gold-primary: #C5A059;
@@ -27,15 +27,15 @@
   --gold-soft-border: rgba(197, 160, 89, 0.35);
   --gold-gradient: linear-gradient(135deg, #DEBE76 0%, #C5A059 50%, #A57E2F 100%);
   --gold-gradient-hover: linear-gradient(135deg, #E6CB8B 0%, #CEAA63 50%, #B38B37 100%);
-  --gold-shadow: 0 6px 20px rgba(197, 160, 89, 0.25);
-  --gold-shadow-hover: 0 10px 28px rgba(197, 160, 89, 0.35);
+  --gold-shadow: 0 4px 16px rgba(197, 160, 89, 0.22);
+  --gold-shadow-hover: 0 8px 24px rgba(197, 160, 89, 0.32);
 
   /* Subtle Borders & Shadows */
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-card: rgba(0, 0, 0, 0.09);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(197, 160, 89, 0.18);
+  --border-card: rgba(197, 160, 89, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.06);
 
   /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
@@ -172,6 +172,20 @@ button, input, select, textarea {
   max-width: 620px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Hairlines decorativas elegantes (estilo editorial) */
+.hairline {
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-primary), transparent);
+  margin: 1rem 0 1.5rem;
+}
+
+.hairline-center {
+  margin: 1rem auto 1.5rem;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
 }
 
 /* --- Buttons --- */
@@ -499,51 +513,65 @@ button, input, select, textarea {
   justify-content: center;
   gap: 1.25rem;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 0.5rem;
   width: 100%;
 }
 
-.hero-trust-row {
+/* ==========================================================================
+   FAIXA DE AUTORIDADE COMPACTA (3 DESTAQUES - PADRÃO EDITORIAL)
+   ========================================================================== */
+.authority-strip {
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.25rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.authority-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(197, 160, 89, 0.25);
-  width: 100%;
-  max-width: 620px;
-  margin: 0 auto;
-}
-
-.trust-item {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.trust-item-val {
-  font-family: var(--font-serif);
-  font-size: 1.45rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.1;
+.authority-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.75rem;
 }
 
-.trust-item-label {
+.authority-item-divider {
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.authority-val {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.authority-label {
   font-size: 0.72rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 0.35rem;
+  letter-spacing: 0.12em;
+  margin-top: 0.25rem;
+  font-weight: 500;
 }
 
 /* ==========================================================================
    3. APRESENTAÇÃO DO ESPAÇO
    ========================================================================== */
 .about-section {
-  background: var(--bg-white);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
 }
 
 .about-grid {
@@ -556,11 +584,11 @@ button, input, select, textarea {
 .about-image-card {
   width: 100%;
   height: clamp(460px, 58vh, 540px);
-  background: var(--bg-surface);
+  background: var(--bg-white);
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-card);
   position: relative;
 }
 
@@ -583,8 +611,9 @@ button, input, select, textarea {
   line-height: 1.6;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  border-left: 3px solid var(--gold-primary);
+  border-left: 2px solid var(--gold-primary);
   padding-left: 1.25rem;
+  font-style: italic;
 }
 
 .about-desc-text {
@@ -594,61 +623,75 @@ button, input, select, textarea {
   margin-bottom: 2rem;
 }
 
-/* Pillars Grid (Equal Heights & Micro-interaction) */
+/* 3 Diferenciais: Padrão Editorial Leve (Estilo Referência) */
 .about-keypoints {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
   margin-bottom: 2.25rem;
 }
 
 .keypoint-card {
-  background: var(--bg-surface);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 14px;
-  padding: 1.6rem 1.35rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.16);
+  border-radius: 0;
+  padding: 0 0 1.15rem 0;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100%;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s, box-shadow 0.28s;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: border-color var(--transition-fast);
+}
+
+.keypoint-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .keypoint-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(197, 160, 89, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-}
-
-.keypoint-header {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.5rem;
+  border-color: rgba(197, 160, 89, 0.38);
 }
 
 .keypoint-icon {
-  color: var(--gold-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(197, 160, 89, 0.1);
+  color: var(--gold-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.keypoint-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .keypoint-name {
-  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .keypoint-desc {
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
    4. MENU DE SERVIÇOS (RIGOROUS EQUAL HEIGHTS & SYMMETRY)
    ========================================================================== */
 .services-section {
-  background: var(--bg-body);
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .services-text-grid {
@@ -660,39 +703,38 @@ button, input, select, textarea {
 }
 
 .service-text-card {
-  background: var(--bg-white);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 14px;
-  padding: 2.25rem 2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 2.1rem 1.9rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s, border-color 0.3s;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
 .service-text-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(197, 160, 89, 0.35);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: rgba(197, 160, 89, 0.45);
+  box-shadow: 0 10px 28px rgba(197, 160, 89, 0.08);
 }
 
 .service-card-top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 0.85rem;
-  flex-wrap: wrap;
+  margin-bottom: 0.65rem;
 }
 
-.service-card-title {
-  font-family: var(--font-serif);
-  font-size: 1.32rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.3;
+.service-number {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 0.2em;
 }
 
 .service-card-badge {
@@ -701,23 +743,33 @@ button, input, select, textarea {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gold-dark);
-  background: rgba(197, 160, 89, 0.09);
+  background: rgba(197, 160, 89, 0.1);
   border: 1px solid rgba(197, 160, 89, 0.25);
-  padding: 0.28rem 0.75rem;
+  padding: 0.25rem 0.75rem;
   border-radius: var(--radius-pill);
   white-space: normal;
+}
+
+.service-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-top: 0.25rem;
 }
 
 .service-card-desc {
   font-size: 0.92rem;
   color: var(--text-muted);
   line-height: 1.7;
+  margin-top: 0.65rem;
   margin-bottom: 1.75rem;
   flex-grow: 1;
 }
 
 .service-card-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(197, 160, 89, 0.16);
   padding-top: 1.15rem;
   display: flex;
   align-items: center;
@@ -731,12 +783,15 @@ button, input, select, textarea {
   color: var(--text-light);
   font-size: 0.78rem;
   line-height: 1.4;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .service-card-link {
   color: var(--gold-dark);
   font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -754,42 +809,40 @@ button, input, select, textarea {
   grid-column: 1 / -1;
 }
 
-/* Luxury Editorial Banner */
+/* Luxury Editorial Banner (Card Marfim com borda dourada suave) */
 .services-cta-banner {
-  background: linear-gradient(135deg, #1A1A1A 0%, #121212 100%);
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  border-radius: 18px;
-  padding: clamp(2.5rem, 5vw, 3.5rem);
+  background: var(--bg-surface);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: 16px;
+  padding: clamp(2.25rem, 4.5vw, 3.25rem);
   text-align: center;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-  max-width: 840px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.03);
+  max-width: 820px;
   margin: 0 auto;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .services-cta-banner h3 {
   font-family: var(--font-serif);
-  font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
   font-weight: 500;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 0.65rem;
 }
 
 .services-cta-banner p {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.96rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
   line-height: 1.65;
-  max-width: 600px;
-  margin: 0 auto 1.85rem;
+  max-width: 580px;
+  margin: 0 auto 1.75rem;
 }
 
 /* ==========================================================================
    5. GALERIA DE EXCELÊNCIA (EDITORIAL 1:1 SQUARE MOSAIC)
    ========================================================================== */
 .gallery-section {
-  background: var(--bg-white);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
 }
 
 .gallery-mosaic-grid {
@@ -802,11 +855,11 @@ button, input, select, textarea {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-  background: var(--bg-surface);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  background: var(--bg-white);
+  border: 1px solid var(--border-card);
 }
 
 .gallery-square-img {
@@ -828,7 +881,7 @@ button, input, select, textarea {
   left: 0;
   right: 0;
   padding: 1.5rem 1.25rem 1rem;
-  background: linear-gradient(180deg, transparent 30%, rgba(18, 18, 18, 0.88) 100%);
+  background: linear-gradient(180deg, transparent 20%, rgba(18, 18, 18, 0.9) 100%);
   color: #FFFFFF;
   opacity: 0;
   transform: translateY(8px);
@@ -857,18 +910,20 @@ button, input, select, textarea {
    6. PRÉ-AGENDAMENTO (FORMULÁRIO ESTRATÉGICO OTIMIZADO)
    ========================================================================== */
 .booking-section {
-  background: linear-gradient(180deg, #FAF9F6 0%, #F5F3EB 100%);
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .booking-wrapper {
   max-width: 680px;
   width: 100%;
   margin: 0 auto;
-  background: var(--bg-white);
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  border-radius: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
   padding: clamp(2rem, 5vw, 3.5rem);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
 }
 
 .booking-form {
@@ -890,7 +945,7 @@ button, input, select, textarea {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   margin-bottom: 0.2rem;
 }
 
@@ -899,20 +954,19 @@ button, input, select, textarea {
   width: 100%;
   height: 52px;
   padding: 0 1.15rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
-  background-color: var(--bg-body);
+  background-color: #FFFFFF;
   color: var(--text-primary);
   font-size: 0.94rem;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   outline: none;
 }
 
 .form-input:focus,
 .form-select:focus {
   border-color: var(--gold-primary);
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
 }
 
 .form-row {
@@ -944,8 +998,7 @@ button, input, select, textarea {
    7. LOCALIZAÇÃO E CONTATO DIRETO (BLOCO SIMÉTRICO)
    ========================================================================== */
 .location-section {
-  background: var(--bg-white);
-  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
 }
 
 .location-layout {
@@ -956,7 +1009,7 @@ button, input, select, textarea {
 }
 
 .location-info-panel {
-  background: var(--bg-surface);
+  background: var(--bg-white);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   padding: clamp(1.75rem, 4vw, 2.75rem);
@@ -977,9 +1030,9 @@ button, input, select, textarea {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--bg-white);
+  background: var(--bg-surface);
   border: 1px solid var(--border-card);
-  color: var(--gold-primary);
+  color: var(--gold-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1018,12 +1071,13 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   8. FOOTER (RODAPÉ MINIMALISTA)
+   8. FOOTER (RODAPÉ MINIMALISTA COM ALTO CONTRASTE)
    ========================================================================== */
 .site-footer {
-  background: #111111;
-  color: #E0E0E0;
+  background: #141414;
+  color: #F0F0F0;
   padding: 3.5rem 0 2.5rem;
+  border-top: 1px solid rgba(197, 160, 89, 0.22);
 }
 
 .footer-content {
@@ -1038,12 +1092,12 @@ button, input, select, textarea {
   height: 46px;
   width: auto;
   filter: brightness(0) invert(1);
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .footer-address {
   font-size: 0.88rem;
-  color: #A0A0A0;
+  color: #CCCCCC;
   max-width: 500px;
   line-height: 1.6;
 }
@@ -1059,6 +1113,7 @@ button, input, select, textarea {
   height: 42px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -1068,16 +1123,17 @@ button, input, select, textarea {
 
 .footer-social-btn:hover {
   background: var(--gold-primary);
+  border-color: var(--gold-primary);
   color: #111111;
   transform: translateY(-2px);
 }
 
 .footer-rights {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   width: 100%;
   padding-top: 1.75rem;
   font-size: 0.8rem;
-  color: #777777;
+  color: #999999;
   text-align: center;
 }
 
@@ -1478,88 +1534,123 @@ button, input, select, textarea {
      5. CARDS: 1 COLUNA, 100% LARGURA, 24px GAP, HEIGHT AUTO
      ========================================================================== */
 
-  /* 3 Cards: Hero Trust Points */
-  .hero-trust-row {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
+  /* Faixa de Autoridade Compacta no Mobile (Linha condensada sem empilhamento vertical) */
+  .authority-strip {
+    padding: 0.65rem 0 !important;
+    background-color: #FFFFFF !important;
+    border-top: 1px solid var(--border-subtle) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    padding-top: 1.75rem !important;
-    border-top: 1px solid var(--border-subtle) !important;
   }
 
-  .trust-item {
+  .authority-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0 !important;
+    align-items: center !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    padding: 1.5rem 1.25rem !important;
-    height: auto !important;
-    min-height: unset !important;
-    background: var(--bg-white) !important;
-    border: 1px solid var(--border-card) !important;
-    border-radius: var(--radius-md) !important;
-    box-shadow: var(--shadow-sm) !important;
+  }
+
+  .authority-item {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    gap: 0.35rem !important;
+    padding: 0.2rem 0.25rem !important;
+    box-sizing: border-box !important;
   }
 
-  .trust-item-val {
-    font-size: 1.35rem !important;
-    line-height: 1.1 !important;
+  .authority-item-divider {
+    border-left: 1px solid var(--border-subtle) !important;
+    border-right: 1px solid var(--border-subtle) !important;
   }
 
-  .trust-item-label {
-    font-size: 0.78rem !important;
+  .authority-val {
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    line-height: 1.15 !important;
+    color: var(--text-primary) !important;
   }
 
-  /* 3 Cards: A Experiência Premium */
+  .authority-label {
+    font-size: 0.58rem !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.25 !important;
+    margin-top: 0.15rem !important;
+    font-weight: 500 !important;
+  }
+
+  /* 3 Diferenciais: Lista Editorial Leve no Mobile */
   .about-keypoints {
     display: flex !important;
     flex-direction: column !important;
-    gap: 24px !important;
+    gap: 1rem !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    margin-bottom: 2.25rem !important;
+    margin-bottom: 2rem !important;
   }
 
   .keypoint-card {
     width: 100% !important;
     box-sizing: border-box !important;
-    padding: 1.5rem 1.25rem !important;
+    padding: 0 0 1rem 0 !important;
     height: auto !important;
     min-height: unset !important;
-    background: var(--bg-surface) !important;
-    border: 1px solid var(--border-card) !important;
-    border-radius: var(--radius-md) !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.16) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     align-items: flex-start !important;
     text-align: left !important;
+    gap: 0.85rem !important;
   }
 
-  .keypoint-header {
+  .keypoint-card:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .keypoint-icon {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    background: rgba(197, 160, 89, 0.1) !important;
+    color: var(--gold-dark) !important;
     display: flex !important;
     align-items: center !important;
-    gap: 0.75rem !important;
-    margin-bottom: 0.5rem !important;
-    width: 100% !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    margin-top: 0.1rem !important;
+  }
+
+  .keypoint-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.2rem !important;
+    flex: 1 !important;
   }
 
   .keypoint-name {
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     font-weight: 600 !important;
+    color: var(--text-primary) !important;
     white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }
 
   .keypoint-desc {
-    font-size: 0.85rem !important;
-    line-height: 1.55 !important;
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
+    color: var(--text-muted) !important;
     white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
@@ -1615,6 +1706,27 @@ button, input, select, textarea {
     white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
+  }
+
+  .service-card-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.65rem !important;
+    padding-top: 1rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .service-card-detail {
+    font-size: 0.76rem !important;
+    line-height: 1.4 !important;
+    color: var(--text-light) !important;
+  }
+
+  .service-card-link {
+    font-size: 0.82rem !important;
+    letter-spacing: 0.04em !important;
   }
 
   .services-cta-banner {
@@ -1713,5 +1825,16 @@ button, input, select, textarea {
   .floating-whatsapp-btn {
     width: 50px !important;
     height: 50px !important;
+  }
+
+  /* Rodapé Mobile */
+  .site-footer {
+    padding: 2.75rem 0 2rem !important;
+  }
+
+  .footer-address {
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
+    padding: 0 0.5rem !important;
   }
 }
