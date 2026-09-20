@@ -66,6 +66,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -73,10 +76,17 @@ body {
   color: var(--text-secondary);
   font-family: var(--font-sans);
   line-height: 1.65;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  max-width: 100vw;
   width: 100%;
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, label, input, button, select {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 img, svg {
@@ -509,7 +519,7 @@ button, input, select, textarea {
 /* Pillars Grid (Equal Heights) */
 .about-keypoints {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-bottom: 2.25rem;
 }
@@ -518,7 +528,7 @@ button, input, select, textarea {
   background: var(--bg-surface);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1117,153 +1127,338 @@ button, input, select, textarea {
     font-weight: 600;
   }
 
-  /* Hero Mobile */
+  /* ==========================================================================
+     CONTAINER SAFE AREA (MÍNIMO 24px LATERAIS)
+     ========================================================================== */
+  .container,
+  .hero-container {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ==========================================================================
+     1. HERO SECTION MOBILE CORRECTION
+     ========================================================================== */
   .hero-section {
-    padding-top: 2rem;
-    padding-bottom: 3.5rem;
+    padding-top: 2rem !important;
+    padding-bottom: 3.5rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-text {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-text .eyebrow-tag {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 6vw, 2.15rem) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.015em !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+  }
+
+  .hero-title span {
+    display: block !important;
+    font-size: inherit !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 1.85rem !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .hero-actions {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.85rem;
-    margin-bottom: 2.25rem;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 0.85rem !important;
+    margin-bottom: 2.25rem !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .hero-actions .btn-gold,
   .hero-actions .btn-gold-outline {
-    width: 100%;
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-visual {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-image-frame {
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .hero-image-frame img {
-    height: 320px;
+    width: 100% !important;
+    height: 320px !important;
+    object-fit: cover !important;
+    display: block !important;
   }
 
+  /* ==========================================================================
+     2. DEFINITIVE CARDS CORRECTION (100% WIDTH, 1 COLUMN, 24px GAP, HEIGHT AUTO)
+     ========================================================================== */
+
+  /* 3 Cards: Hero Trust Points (1 Coluna, 100% Largura, 24px Gap) */
   .hero-trust-row {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding-top: 1.75rem !important;
+    border-top: 1px solid var(--border-subtle) !important;
+  }
+
+  .trust-item {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.5rem 1.25rem !important;
+    height: auto !important;
+    min-height: unset !important;
+    background: var(--bg-white) !important;
+    border: 1px solid var(--border-card) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-sm) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 0.35rem !important;
   }
 
   .trust-item-val {
-    font-size: 1.15rem;
+    font-size: 1.35rem !important;
+    line-height: 1.1 !important;
   }
 
   .trust-item-label {
-    font-size: 0.68rem;
+    font-size: 0.78rem !important;
   }
 
-  /* About Mobile */
-  .about-image-card img {
-    height: 320px;
-  }
-
+  /* 3 Cards: A Experiência Premium (1 Coluna, 100% Largura, 24px Gap) */
   .about-keypoints {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 2.25rem !important;
+  }
+
+  .keypoint-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.5rem 1.25rem !important;
+    height: auto !important;
+    min-height: unset !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-card) !important;
+    border-radius: var(--radius-md) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .keypoint-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
+  }
+
+  .keypoint-name {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+  }
+
+  .keypoint-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .about-image-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .about-image-card img {
+    width: 100% !important;
+    height: 320px !important;
+    object-fit: cover !important;
   }
 
   .about-content .btn-gold {
-    width: 100%;
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
-  /* Services Mobile (Single Column, Equal Heights) */
+  /* Services Cards (1 Coluna, 100% Largura, 24px Gap) */
   .services-text-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .service-full-span {
-    grid-column: 1;
+    grid-column: 1 !important;
   }
 
   .service-text-card {
-    padding: 1.5rem 1.25rem;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.5rem 1.25rem !important;
+    height: auto !important;
+    min-height: unset !important;
   }
 
   .services-cta-banner {
-    padding: 1.75rem 1.25rem;
+    padding: 1.75rem 1.25rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .services-cta-banner .btn-gold {
-    width: 100%;
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
   /* Gallery Mobile (2 Columns Square 1:1) */
   .gallery-mosaic-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.85rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .gallery-caption-overlay {
-    opacity: 1;
-    transform: translateY(0);
-    padding: 0.75rem 0.5rem 0.5rem;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    padding: 0.75rem 0.5rem 0.5rem !important;
   }
 
   .gallery-caption-title {
-    font-size: 0.82rem;
+    font-size: 0.82rem !important;
   }
 
   .gallery-caption-sub {
-    font-size: 0.68rem;
-    display: none;
+    font-size: 0.68rem !important;
+    display: none !important;
   }
 
   /* Form Mobile (100% Width Fields) */
   .booking-wrapper {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1.25rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .form-row {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .btn-form-submit {
-    width: 100%;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Location Mobile */
   .location-info-panel {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1.25rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .location-info-panel .btn-gold {
-    width: 100%;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    justify-content: center !important;
   }
 
   .map-container {
-    min-height: 280px;
+    min-height: 280px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .map-iframe {
-    min-height: 280px;
+    min-height: 280px !important;
+    width: 100% !important;
   }
 
   /* Floating WhatsApp */
   .floating-whatsapp-tooltip {
-    display: none;
+    display: none !important;
   }
 
   .floating-whatsapp {
-    bottom: 1.25rem;
-    right: 1.25rem;
+    bottom: 1.25rem !important;
+    right: 1.25rem !important;
   }
 
   .floating-whatsapp-btn {
-    width: 50px;
-    height: 50px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-trust-row {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
-    text-align: center;
-  }
-
-  .trust-item {
-    align-items: center;
+    width: 50px !important;
+    height: 50px !important;
   }
 }
