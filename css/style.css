@@ -187,7 +187,10 @@ button, input, select, textarea {
   box-shadow: var(--gold-shadow);
   cursor: pointer;
   transition: all var(--transition-fast);
-  white-space: nowrap;
+  box-sizing: border-box;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .btn-gold:hover {
@@ -212,7 +215,10 @@ button, input, select, textarea {
   border: 1.5px solid var(--gold-primary);
   cursor: pointer;
   transition: all var(--transition-fast);
-  white-space: nowrap;
+  box-sizing: border-box;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .btn-gold-outline:hover {
@@ -597,8 +603,9 @@ button, input, select, textarea {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .service-card-title {
@@ -618,7 +625,7 @@ button, input, select, textarea {
   background: var(--gold-soft-bg);
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-pill);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .service-card-desc {
@@ -637,6 +644,7 @@ button, input, select, textarea {
   justify-content: space-between;
   gap: 0.75rem;
   font-size: 0.82rem;
+  flex-wrap: wrap;
 }
 
 .service-card-detail {
@@ -652,7 +660,8 @@ button, input, select, textarea {
   align-items: center;
   gap: 0.35rem;
   transition: gap var(--transition-fast);
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .service-card-link:hover {
@@ -1054,93 +1063,158 @@ button, input, select, textarea {
 }
 
 @media (max-width: 768px) {
-  /* Header Mobile: Center Logo, Equal Spacing */
+  /* ==========================================================================
+     0. OBRIGATÓRIO: QUEBRA E CONTENÇÃO UNIVERSAL DE TEXTO & RESETS
+     ========================================================================== */
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+  }
+
+  body, h1, h2, h3, h4, h5, h6, p, span, a, label, li, blockquote, div {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  section {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ==========================================================================
+     1. HEADER MOBILE: FLEXBOX SPACE-BETWEEN, CIRCULAR ICON CTA (ZERO OVERLAP)
+     ========================================================================== */
   .nav-container {
-    height: 72px;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 68px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
   }
 
   .header-left-col {
-    display: flex;
-    align-items: center;
-    z-index: 10;
-  }
-
-  .header-right-col {
-    display: flex;
-    align-items: center;
-    z-index: 10;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 44px !important;
+    flex-shrink: 0 !important;
+    z-index: 10 !important;
   }
 
   .mobile-toggle {
-    display: flex;
+    display: flex !important;
   }
 
+  /* Logo: In normal flex flow, centered, never touches buttons */
   .brand-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 96px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
   }
 
   .brand-logo-img {
-    height: 42px;
+    height: 38px !important;
+    max-width: 140px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
   }
 
+  .header-right-col {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: 44px !important;
+    flex-shrink: 0 !important;
+    z-index: 10 !important;
+  }
+
+  /* Mobile CTA: Circular WhatsApp Icon Button to free space for logo */
   .nav-cta-btn {
-    padding: 0.55rem 0.95rem;
-    font-size: 0.75rem;
-    gap: 0.35rem;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: var(--gold-shadow) !important;
+    box-sizing: border-box !important;
   }
 
-  .nav-cta-btn span {
-    display: none;
-  }
-
+  .nav-cta-btn span,
   .nav-cta-btn::after {
-    content: 'Agendar';
+    display: none !important;
+    content: none !important;
+  }
+
+  .nav-cta-btn .btn-icon {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 !important;
+    display: block !important;
   }
 
   /* Drawer Navigation */
   .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 85%;
-    max-width: 320px;
-    height: 100vh;
-    background: #FFFFFF;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 3rem 2rem;
-    gap: 1.75rem;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-    transition: right var(--transition-smooth);
-    z-index: 1050;
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    width: 85% !important;
+    max-width: 320px !important;
+    height: 100vh !important;
+    background: #FFFFFF !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding: 3rem 2rem !important;
+    gap: 1.75rem !important;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1) !important;
+    transition: right var(--transition-smooth) !important;
+    z-index: 1050 !important;
   }
 
   .nav-menu.is-active {
-    right: 0;
+    right: 0 !important;
   }
 
   .nav-link {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    white-space: normal !important;
   }
 
   /* ==========================================================================
-     CONTAINER SAFE AREA (MÍNIMO 24px LATERAIS)
+     2. MARGENS DE SEGURANÇA LATERAIS (20px UNIVERSAL)
      ========================================================================== */
   .container,
-  .hero-container {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+  .hero-container,
+  section .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
 
   /* ==========================================================================
-     1. HERO SECTION MOBILE CORRECTION
+     3. CORREÇÃO DE TEXTOS CORTADOS & HERO SECTION
      ========================================================================== */
   .hero-section {
     padding-top: 2rem !important;
@@ -1169,48 +1243,71 @@ button, input, select, textarea {
     justify-content: center !important;
   }
 
-  .hero-text .eyebrow-tag {
+  /* Tarja Superior: Fonte reduzida para 11px/12px sem corte */
+  .hero-text .eyebrow-tag,
+  .eyebrow-tag {
+    font-size: 11px !important;
+    letter-spacing: 0.04em !important;
+    padding: 0.35rem 0.65rem !important;
+    line-height: 1.35 !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    text-align: center !important;
+    display: inline-block !important;
   }
 
+  /* Título Principal: Reduzido para max 32px / 1.85rem */
   .hero-title {
-    font-size: clamp(1.75rem, 6vw, 2.15rem) !important;
-    line-height: 1.25 !important;
+    font-size: clamp(1.65rem, 5.5vw, 1.85rem) !important;
+    line-height: 1.22 !important;
     letter-spacing: -0.015em !important;
     margin-bottom: 1rem !important;
     text-align: center !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
-    hyphens: auto;
   }
 
   .hero-title span {
     display: block !important;
     font-size: inherit !important;
+    white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }
 
+  /* Subtítulo Hero */
   .hero-subtitle {
-    font-size: 0.95rem !important;
-    line-height: 1.65 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.6 !important;
     margin-bottom: 1.85rem !important;
     text-align: center !important;
+    width: 100% !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }
 
+  /* ==========================================================================
+     4. CORREÇÃO DOS BOTÕES (CTAs: 100% LARGURA, WRAP PERMITIDO, ZERO OVERFLOW)
+     ========================================================================== */
   .hero-actions {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
     gap: 0.85rem !important;
     margin-bottom: 2.25rem !important;
@@ -1218,12 +1315,38 @@ button, input, select, textarea {
     justify-content: center !important;
   }
 
-  .hero-actions .btn-gold,
-  .hero-actions .btn-gold-outline {
+  .btn-gold,
+  .btn-gold-outline,
+  .btn-form-submit {
     width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: center !important;
+    font-size: 0.84rem !important;
+    padding: 0.85rem 1rem !important;
+    line-height: 1.35 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+  }
+
+  .btn-gold span,
+  .btn-gold-outline span,
+  .btn-form-submit span {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: center !important;
+    display: inline !important;
+    line-height: 1.35 !important;
+  }
+
+  .btn-icon {
+    flex-shrink: 0 !important;
   }
 
   .hero-visual {
@@ -1244,10 +1367,10 @@ button, input, select, textarea {
   }
 
   /* ==========================================================================
-     2. DEFINITIVE CARDS CORRECTION (100% WIDTH, 1 COLUMN, 24px GAP, HEIGHT AUTO)
+     5. CARDS: 1 COLUNA, 100% LARGURA, 24px GAP, HEIGHT AUTO
      ========================================================================== */
 
-  /* 3 Cards: Hero Trust Points (1 Coluna, 100% Largura, 24px Gap) */
+  /* 3 Cards: Hero Trust Points */
   .hero-trust-row {
     display: flex !important;
     flex-direction: column !important;
@@ -1285,7 +1408,7 @@ button, input, select, textarea {
     font-size: 0.78rem !important;
   }
 
-  /* 3 Cards: A Experiência Premium (1 Coluna, 100% Largura, 24px Gap) */
+  /* 3 Cards: A Experiência Premium */
   .about-keypoints {
     display: flex !important;
     flex-direction: column !important;
@@ -1321,11 +1444,17 @@ button, input, select, textarea {
   .keypoint-name {
     font-size: 0.95rem !important;
     font-weight: 600 !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .keypoint-desc {
     font-size: 0.85rem !important;
     line-height: 1.55 !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .about-image-card {
@@ -1346,7 +1475,7 @@ button, input, select, textarea {
     box-sizing: border-box !important;
   }
 
-  /* Services Cards (1 Coluna, 100% Largura, 24px Gap) */
+  /* Services Cards */
   .services-text-grid {
     display: flex !important;
     flex-direction: column !important;
@@ -1365,6 +1494,19 @@ button, input, select, textarea {
     padding: 1.5rem 1.25rem !important;
     height: auto !important;
     min-height: unset !important;
+  }
+
+  .service-card-title {
+    font-size: 1.15rem !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .service-card-desc {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .services-cta-banner {
@@ -1396,6 +1538,9 @@ button, input, select, textarea {
 
   .gallery-caption-title {
     font-size: 0.82rem !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .gallery-caption-sub {
