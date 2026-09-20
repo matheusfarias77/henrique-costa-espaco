@@ -123,4 +123,27 @@ Como podemos confirmar o melhor horário?`;
 
     sections.forEach((section) => sectionObserver.observe(section));
   }
+
+  /* --------------------------------------------------------------------------
+     5. SCROLL REVEAL (DISCREET EDITORIAL MICROINTERACTIONS)
+     -------------------------------------------------------------------------- */
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.08,
+      rootMargin: '0px 0px -30px 0px'
+    });
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('is-revealed'));
+  }
 });
