@@ -125,7 +125,39 @@ Como podemos confirmar o melhor horário?`;
   }
 
   /* --------------------------------------------------------------------------
-     5. SCROLL REVEAL (DISCREET EDITORIAL MICROINTERACTIONS)
+     5. FAQ ACCORDION (ACCESSIBLE, ARIA-EXPANDED, KEYBOARD FRIENDLY)
+     -------------------------------------------------------------------------- */
+  const faqTriggers = document.querySelectorAll('.faq-trigger');
+  if (faqTriggers.length > 0) {
+    faqTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        const answerId = trigger.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+
+        // Close other items to maintain an uncluttered editorial reading flow
+        faqTriggers.forEach((otherTrigger) => {
+          if (otherTrigger !== trigger) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            const otherAnswerId = otherTrigger.getAttribute('aria-controls');
+            const otherAnswer = document.getElementById(otherAnswerId);
+            if (otherAnswer) {
+              otherAnswer.hidden = true;
+            }
+          }
+        });
+
+        // Toggle clicked item
+        trigger.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+        if (answer) {
+          answer.hidden = isExpanded;
+        }
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     6. SCROLL REVEAL (DISCREET EDITORIAL MICROINTERACTIONS)
      -------------------------------------------------------------------------- */
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   if ('IntersectionObserver' in window && revealElements.length > 0) {
