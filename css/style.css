@@ -359,40 +359,44 @@ button, input, select, textarea {
 }
 
 .site-header .nav-cta-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: auto;
   min-width: unset;
   max-width: unset;
-  height: auto;
-  min-height: 44px;
-  padding: 0 16px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 8px;
-  background-color: #C5A059;
+  background-color: #E8DFC9;
   background-image: none;
-  color: #121212;
+  background: #E8DFC9;
+  color: #40382A;
   font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   text-transform: none;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
   box-sizing: border-box;
-  border: 1px solid #B58F48;
-  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.22);
+  border: 1px solid #DCD2BB;
+  box-shadow: none;
+  opacity: 1;
   cursor: pointer;
-  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .site-header .nav-cta-btn:hover {
-  background-color: #B58F48;
-  color: #121212;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.32);
+  background-color: #DFD5BD;
+  border-color: #D3C7AC;
+  color: #40382A;
+  transform: none;
+  box-shadow: none;
 }
 
 .site-header .nav-cta-btn:focus-visible {
@@ -403,19 +407,36 @@ button, input, select, textarea {
 .site-header .nav-cta-btn span {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  color: #121212;
+  font-size: 13px;
+  font-weight: 500;
+  color: #40382A;
+  opacity: 1;
   line-height: 1;
   white-space: nowrap;
   word-wrap: normal;
   overflow-wrap: normal;
 }
 
-.site-header .nav-cta-btn::before,
-.site-header .nav-cta-btn::after {
+.site-header .nav-cta-btn::before {
   display: none !important;
   content: none !important;
+}
+
+.site-header .nav-cta-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  height: 44px;
+  min-height: 44px;
+  width: 100%;
+  min-width: 100%;
+  pointer-events: auto;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Mobile Toggle */
@@ -1383,39 +1404,46 @@ button, input, select, textarea {
     z-index: 10 !important;
   }
 
-  /* Mobile CTA: Formato retangular com cantos arredondados, fundo dourado sólido e texto escuro */
+  /* Mobile CTA: Fundo fosco suave #E8DFC9, 34px visível, área de toque mínima 44px, fonte 13px peso 500 */
   .site-header .nav-cta-btn {
+    position: relative !important;
     width: auto !important;
     min-width: unset !important;
     max-width: unset !important;
-    height: auto !important;
-    min-height: 44px !important;
-    padding: 0 16px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+    padding: 0 12px !important;
     border-radius: 8px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-family: var(--font-sans) !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.02em !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
     text-transform: none !important;
     text-decoration: none !important;
-    background: #C5A059 !important;
-    background-color: #C5A059 !important;
+    background: #E8DFC9 !important;
+    background-color: #E8DFC9 !important;
     background-image: none !important;
-    color: #121212 !important;
-    border: 1px solid #B58F48 !important;
-    box-shadow: 0 2px 8px rgba(197, 160, 89, 0.22) !important;
+    color: #40382A !important;
+    border: 1px solid #DCD2BB !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
     box-sizing: border-box !important;
     cursor: pointer !important;
+    transform: none !important;
   }
 
   .site-header .nav-cta-btn:hover {
-    background-color: #B58F48 !important;
-    color: #121212 !important;
+    background-color: #DFD5BD !important;
+    border-color: #D3C7AC !important;
+    color: #40382A !important;
+    box-shadow: none !important;
+    transform: none !important;
   }
 
   .site-header .nav-cta-btn:focus-visible {
@@ -1426,19 +1454,37 @@ button, input, select, textarea {
   .site-header .nav-cta-btn span {
     display: inline-block !important;
     font-family: var(--font-sans) !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    color: #121212 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #40382A !important;
+    opacity: 1 !important;
     line-height: 1 !important;
     white-space: nowrap !important;
     word-wrap: normal !important;
     overflow-wrap: normal !important;
   }
 
-  .site-header .nav-cta-btn::before,
-  .site-header .nav-cta-btn::after {
+  .site-header .nav-cta-btn::before {
     display: none !important;
     content: none !important;
+  }
+
+  .site-header .nav-cta-btn::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateY(-50%) !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    pointer-events: auto !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   /* Drawer Navigation */
