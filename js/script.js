@@ -306,4 +306,38 @@ Como podemos confirmar o melhor horário?`;
   } else {
     revealElements.forEach((el) => el.classList.add('is-revealed'));
   }
+
+  /* --------------------------------------------------------------------------
+     10. AUTHORITY STRIP SEQUENTIAL REVEAL (ESTILO -> CUIDADO -> BELEZA)
+     Duração de 500ms por palavra, intervalos de 100ms, execução única.
+     -------------------------------------------------------------------------- */
+  const authorityStrip = document.querySelector('.authority-strip');
+  if (authorityStrip) {
+    if (prefersReduced) {
+      authorityStrip.classList.add('is-in-view');
+    } else if ('IntersectionObserver' in window) {
+      const stripObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.1,
+        rootMargin: '0px 0px -10px 0px'
+      });
+      stripObserver.observe(authorityStrip);
+
+      // Fallback: se o observer demorar ou falhar, revela com segurança
+      setTimeout(() => {
+        if (!authorityStrip.classList.contains('is-in-view')) {
+          authorityStrip.classList.add('is-in-view');
+        }
+      }, 1200);
+    } else {
+      authorityStrip.classList.add('is-in-view');
+    }
+  }
 });

@@ -18,6 +18,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
+  <!-- Local WOFF2 Font: Cormorant Garamond Italic 500 (Exclusiva para Faixa Editorial) -->
+  <link rel="preload" href="assets/fonts/cormorant-garamond-italic-500.woff2" as="font" type="font/woff2" crossorigin>
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -111,18 +114,14 @@
     <!-- ======================================================================
          FAIXA EDITORIAL (ESTILO · CUIDADO · BELEZA)
          ====================================================================== -->
-    <section class="authority-strip" aria-label="Pilares">
+    <section class="authority-strip" id="faixaEditorial" aria-label="Pilares">
       <div class="container">
-        <div class="authority-grid">
-          <div class="authority-item">
-            <span class="authority-word">Estilo</span>
-          </div>
-          <div class="authority-item authority-item-divider">
-            <span class="authority-word">Cuidado</span>
-          </div>
-          <div class="authority-item">
-            <span class="authority-word">Beleza</span>
-          </div>
+        <div class="authority-content">
+          <span class="authority-word authority-seq-1">Estilo</span>
+          <span class="authority-diamond authority-seq-1-sep" aria-hidden="true"></span>
+          <span class="authority-word authority-seq-2">Cuidado</span>
+          <span class="authority-diamond authority-seq-2-sep" aria-hidden="true"></span>
+          <span class="authority-word authority-seq-3">Beleza</span>
         </div>
       </div>
     </section>

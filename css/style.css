@@ -4,6 +4,15 @@
    Strict structural alignment, equal-height cards, 1:1 square gallery, 100% mobile-safe.
    ========================================================================== */
 
+/* --- Local Typography: Cormorant Garamond 500 Italic (Exclusiva para Faixa Editorial) --- */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/cormorant-garamond-italic-500.woff2') format('woff2');
+}
+
 /* --- Design Tokens --- */
 :root {
   /* Clean Background Palette */
@@ -596,56 +605,98 @@ button, input, select, textarea {
    FAIXA EDITORIAL (ESTILO · CUIDADO · BELEZA)
    ========================================================================== */
 .authority-strip {
-  background-color: #FFFFFF;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background-color: #FAF8F4;
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
   padding: 24px 0;
   position: relative;
   z-index: 2;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: none;
 }
 
 .authority-strip .container {
   padding-left: 12px;
   padding-right: 12px;
-}
-
-.authority-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.authority-item {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authority-content {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 4px 8px;
+  gap: clamp(12px, 3.2vw, 32px);
+  width: auto;
+  max-width: 100%;
   box-sizing: border-box;
-  background: transparent;
-  box-shadow: none;
-  border: none;
-}
-
-.authority-item-divider {
-  border-left: 1px solid rgba(197, 160, 89, 0.38);
-  border-right: 1px solid rgba(197, 160, 89, 0.38);
 }
 
 .authority-word {
-  font-family: var(--font-serif);
-  font-size: 20px;
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-style: italic;
   font-weight: 500;
-  color: var(--text-primary);
-  line-height: 1.2;
+  font-size: clamp(21px, 6.2vw, 25px);
+  color: #302B25;
+  line-height: 1.15;
   text-align: center;
   white-space: nowrap;
   letter-spacing: 0.02em;
   margin: 0;
+  padding: 0;
+  display: inline-block;
+
+  /* Estado inicial da animação de entrada (10px até 0, opacidade 0 até 1) */
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+}
+
+/* Losangos dourados decorativos de aproximadamente 4px */
+.authority-diamond {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background-color: var(--gold-primary, #C5A059);
+  transform: translateY(10px) rotate(45deg);
+  border-radius: 0.5px;
+  flex-shrink: 0;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* Animação sequencial com duração de 500ms por palavra e intervalos de 100ms:
+   Estilo (0ms) -> Cuidado (100ms) -> Beleza (200ms) */
+.authority-strip.is-in-view .authority-seq-1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease-out 0ms, transform 500ms ease-out 0ms;
+}
+
+.authority-strip.is-in-view .authority-seq-1-sep {
+  opacity: 1;
+  transform: translateY(0) rotate(45deg);
+  transition: opacity 500ms ease-out 50ms, transform 500ms ease-out 50ms;
+}
+
+.authority-strip.is-in-view .authority-seq-2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease-out 100ms, transform 500ms ease-out 100ms;
+}
+
+.authority-strip.is-in-view .authority-seq-2-sep {
+  opacity: 1;
+  transform: translateY(0) rotate(45deg);
+  transition: opacity 500ms ease-out 150ms, transform 500ms ease-out 150ms;
+}
+
+.authority-strip.is-in-view .authority-seq-3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease-out 200ms, transform 500ms ease-out 200ms;
 }
 
 /* ==========================================================================
@@ -1420,10 +1471,16 @@ button, input, select, textarea {
 
 /* Fallback caso JavaScript falhe ou esteja desabilitado */
 html:not(.js-enabled) .reveal-on-scroll,
-html:not(.js-enabled) .reveal-photo {
+html:not(.js-enabled) .reveal-photo,
+html:not(.js-enabled) .authority-word,
+html:not(.js-enabled) .authority-diamond {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;
+}
+
+html:not(.js-enabled) .authority-diamond {
+  transform: rotate(45deg) !important;
 }
 
 /* Revelar imediatamente elementos com foco ativo para acessibilidade */
@@ -1458,6 +1515,8 @@ html:not(.js-enabled) .reveal-photo {
   .hero-trust-row,
   .reveal-on-scroll,
   .reveal-photo,
+  .authority-word,
+  .authority-diamond,
   .btn-gold,
   .btn-gold-outline,
   .btn-form-submit,
@@ -1469,6 +1528,10 @@ html:not(.js-enabled) .reveal-photo {
     opacity: 1 !important;
     transition: none !important;
   }
+
+  .authority-diamond {
+    transform: rotate(45deg) !important;
+  }
 }
 
 /* ==========================================================================
@@ -1476,23 +1539,26 @@ html:not(.js-enabled) .reveal-photo {
    Reduz vazios excessivos, aproveita colunas e equilibra proporções
    ========================================================================== */
 @media (min-width: 1024px) {
-  /* 0. Faixa Editorial: 28px no Desktop e proporções elegantes */
+  /* 0. Faixa Editorial: 34px no Desktop, espaçamento de 24px */
   .authority-strip {
-    padding: 28px 0;
+    padding: 24px 0;
+    background-color: #FAF8F4;
   }
 
   .authority-strip .container {
     padding-left: 2rem;
     padding-right: 2rem;
+    display: flex;
+    justify-content: center;
   }
 
-  .authority-item {
-    padding: 6px 24px;
+  .authority-content {
+    gap: 36px;
   }
 
   .authority-word {
-    font-size: 28px;
-    line-height: 1.2;
+    font-size: 34px;
+    line-height: 1.15;
   }
 
   /* 1. Spacing vertical entre seções mais equilibrado e editorial */
@@ -2006,57 +2072,52 @@ html:not(.js-enabled) .reveal-photo {
      5. CARDS: 1 COLUNA, 100% LARGURA, 24px GAP, HEIGHT AUTO
      ========================================================================== */
 
-  /* Faixa Editorial no Mobile (Estilo | Cuidado | Beleza) */
+  /* Faixa Editorial no Mobile (Estilo · Cuidado · Beleza) */
   .authority-strip {
     padding: 24px 0 !important;
-    background-color: #FFFFFF !important;
-    border-top: 1px solid var(--border-subtle) !important;
-    border-bottom: 1px solid var(--border-subtle) !important;
+    background-color: #FAF8F4 !important;
+    border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2) !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    box-shadow: none !important;
   }
 
   .authority-strip .container {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  .authority-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0 !important;
-    align-items: center !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .authority-item {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
     display: flex !important;
+    justify-content: center !important;
+  }
+
+  .authority-content {
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    text-align: center !important;
-    padding: 4px 6px !important;
+    gap: clamp(8px, 2.8vw, 18px) !important;
+    width: auto !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  .authority-item-divider {
-    border-left: 1px solid rgba(197, 160, 89, 0.38) !important;
-    border-right: 1px solid rgba(197, 160, 89, 0.38) !important;
   }
 
   .authority-word {
-    font-family: var(--font-serif) !important;
-    font-size: 20px !important;
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    font-style: italic !important;
     font-weight: 500 !important;
-    color: var(--text-primary) !important;
-    line-height: 1.2 !important;
+    font-size: clamp(21px, 6.2vw, 25px) !important;
+    color: #302B25 !important;
+    line-height: 1.15 !important;
     text-align: center !important;
     white-space: nowrap !important;
     letter-spacing: 0.02em !important;
     margin: 0 !important;
+  }
+
+  .authority-diamond {
+    width: 4px !important;
+    height: 4px !important;
+    background-color: var(--gold-primary, #C5A059) !important;
+    flex-shrink: 0 !important;
   }
 
   /* Redução do espaço entre essa faixa e a foto seguinte no mobile (~32px) */
