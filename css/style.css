@@ -592,53 +592,78 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   FAIXA DE AUTORIDADE COMPACTA (3 DESTAQUES - PADRÃO EDITORIAL)
+/* ==========================================================================
+   FAIXA DE AUTORIDADE (3 DESTAQUES - COMPOSIÇÃO EDITORIAL ALINHADA)
    ========================================================================== */
 .authority-strip {
   background-color: #FFFFFF;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
-  padding: 1.25rem 0;
+  padding: 24px 0;
   position: relative;
   z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.authority-strip .container {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .authority-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  text-align: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .authority-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0.4rem 0.75rem;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 0 clamp(6px, 2vw, 8px);
+  box-sizing: border-box;
 }
 
 .authority-item-divider {
-  border-left: 1px solid var(--border-subtle);
-  border-right: 1px solid var(--border-subtle);
+  border-left: 1px solid #EAE3D5;
+  border-right: 1px solid #EAE3D5;
 }
 
 .authority-val {
+  display: block;
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size: clamp(18px, 4.8vw, 20px);
   font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.15;
+  line-height: 1.2;
+  min-height: calc(2 * 1.2em);
   letter-spacing: -0.01em;
+  text-align: center;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .authority-label {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-top: 0.25rem;
-  font-weight: 500;
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 3.2vw, 13px);
+  font-weight: 400;
+  color: #554F44;
+  line-height: 1.45;
+  margin-top: 8px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ==========================================================================
@@ -1431,6 +1456,32 @@ button, input, select, textarea {
    Reduz vazios excessivos, aproveita colunas e equilibra proporções
    ========================================================================== */
 @media (min-width: 1024px) {
+  /* 0. Faixa de Autoridade: Proporções ampliadas e alinhamento no Desktop */
+  .authority-strip {
+    padding: 30px 0;
+  }
+
+  .authority-strip .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .authority-item {
+    padding: 0 24px;
+  }
+
+  .authority-val {
+    font-size: 1.45rem;
+    line-height: 1.2;
+    min-height: calc(2 * 1.2em);
+  }
+
+  .authority-label {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+
   /* 1. Spacing vertical entre seções mais equilibrado e editorial */
   .section-spacing {
     padding-top: clamp(3.75rem, 5.5vw, 5rem);
@@ -1913,9 +1964,9 @@ button, input, select, textarea {
      5. CARDS: 1 COLUNA, 100% LARGURA, 24px GAP, HEIGHT AUTO
      ========================================================================== */
 
-  /* Faixa de Autoridade Compacta no Mobile (Linha condensada sem empilhamento vertical) */
+  /* Faixa de Autoridade no Mobile (3 Colunas Lado a Lado, Alinhadas e Espaçadas) */
   .authority-strip {
-    padding: 0.65rem 0 !important;
+    padding: 24px 0 !important;
     background-color: #FFFFFF !important;
     border-top: 1px solid var(--border-subtle) !important;
     border-bottom: 1px solid var(--border-subtle) !important;
@@ -1923,11 +1974,16 @@ button, input, select, textarea {
     box-sizing: border-box !important;
   }
 
+  .authority-strip .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
   .authority-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 0 !important;
-    align-items: center !important;
+    align-items: stretch !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -1936,33 +1992,40 @@ button, input, select, textarea {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     text-align: center !important;
-    padding: 0.2rem 0.25rem !important;
+    padding: 0 clamp(6px, 2vw, 8px) !important;
     box-sizing: border-box !important;
   }
 
   .authority-item-divider {
-    border-left: 1px solid var(--border-subtle) !important;
-    border-right: 1px solid var(--border-subtle) !important;
+    border-left: 1px solid #EAE3D5 !important;
+    border-right: 1px solid #EAE3D5 !important;
   }
 
   .authority-val {
-    font-size: clamp(0.92rem, 3.2vw, 1.05rem) !important;
+    font-size: clamp(18px, 4.8vw, 20px) !important;
     font-weight: 600 !important;
-    line-height: 1.15 !important;
+    line-height: 1.2 !important;
+    min-height: calc(2 * 1.2em) !important;
     color: var(--text-primary) !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    margin: 0 !important;
   }
 
   .authority-label {
-    font-size: 0.58rem !important;
-    color: var(--text-muted) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
-    line-height: 1.25 !important;
-    margin-top: 0.15rem !important;
-    font-weight: 500 !important;
+    font-size: clamp(12px, 3.2vw, 13px) !important;
+    color: #554F44 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    line-height: 1.45 !important;
+    margin-top: 8px !important;
+    font-weight: 400 !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   /* 3 Diferenciais: Lista Editorial Leve no Mobile */
