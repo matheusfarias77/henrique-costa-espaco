@@ -1,0 +1,7 @@
+# robots.txt for Henrique Costa Espaço
+# Allow all search engine crawlers to access the public site
+User-agent: *
+Allow: /
+
+# Sitemap definition
+Sitemap: https://henriquecostaespaco.com.br/sitemap.xml

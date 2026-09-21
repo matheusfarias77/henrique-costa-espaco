@@ -141,6 +141,28 @@ button, input, select, textarea {
   text-align: center;
 }
 
+/* --- Accessibility: Screen-reader & Search Crawler Semantic Helper --- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* --- Keyboard Navigation & Accessible Focus States --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
 /* --- Badges & Headings --- */
 .eyebrow-tag {
   display: inline-flex;
@@ -1598,6 +1620,36 @@ button, input, select, textarea {
   text-align: center;
 }
 
+.footer-copyright {
+  line-height: 1.5;
+}
+
+.footer-developer {
+  margin-top: 0.45rem;
+  font-size: 0.74rem;
+  color: #888888;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.footer-developer-link {
+  color: #CCCCCC;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: color var(--transition-fast, 0.25s ease);
+}
+
+.footer-developer-link:hover {
+  color: var(--gold-primary);
+  text-decoration: none;
+}
+
+.footer-developer-link:focus-visible {
+  outline: 1px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
 /* ==========================================================================
    FLOATING WHATSAPP BUTTON
    ========================================================================== */
@@ -1880,7 +1932,13 @@ html:not(.js-enabled) .authority-diamond {
 
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 2.75rem;
+    gap: 2.25rem;
+  }
+
+  .about-image-card {
+    height: 380px;
+    max-width: 580px;
+    margin: 0 auto;
   }
 
   .gallery-mosaic-grid {
@@ -2347,9 +2405,15 @@ html:not(.js-enabled) .authority-diamond {
     flex-shrink: 0 !important;
   }
 
-  /* Redução do espaço entre essa faixa e a foto seguinte no mobile (~32px) */
+  /* Respiro superior elegante entre a faixa editorial e o card da foto no mobile */
   .about-section {
-    padding-top: 32px !important;
+    padding-top: 24px !important;
+  }
+
+  /* Fluxo contínuo com respiro menor entre o fim do card e O CONCEITO (~20px) */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
   }
 
   /* 3 Diferenciais: Lista Editorial Leve no Mobile */
@@ -2423,15 +2487,29 @@ html:not(.js-enabled) .authority-diamond {
     overflow-wrap: break-word !important;
   }
 
+  /* Card da foto compacto e proporcional, sem sobra branca interna */
   .about-image-card {
     width: 100% !important;
+    max-width: 100% !important;
+    height: clamp(260px, 68vw, 300px) !important;
+    min-height: 0 !important;
+    max-height: 320px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    background: transparent !important;
   }
 
+  /* Imagem preenche 100% do card com enquadramento proporcional e editável */
   .about-image-card img {
     width: 100% !important;
-    height: 320px !important;
+    height: 100% !important;
     object-fit: cover !important;
+    object-position: center 20% !important;
+    display: block !important;
   }
 
   .about-content .btn-gold {
@@ -2684,6 +2762,11 @@ html:not(.js-enabled) .authority-diamond {
     font-size: 0.82rem !important;
     line-height: 1.55 !important;
     padding: 0 0.5rem !important;
+  }
+
+  .footer-developer {
+    font-size: 0.72rem !important;
+    margin-top: 0.35rem !important;
   }
 
   /* ==========================================================================
