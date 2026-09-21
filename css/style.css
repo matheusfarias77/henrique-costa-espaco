@@ -358,11 +358,64 @@ button, input, select, textarea {
   gap: 0.75rem;
 }
 
-.nav-cta-btn {
-  padding: 0.72rem 1.45rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.site-header .nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: unset;
+  max-width: unset;
+  height: auto;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background-color: #C5A059;
+  background-image: none;
+  color: #121212;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: 1px solid #B58F48;
+  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.22);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.site-header .nav-cta-btn:hover {
+  background-color: #B58F48;
+  color: #121212;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.32);
+}
+
+.site-header .nav-cta-btn:focus-visible {
+  outline: 2px solid #8F6D28;
+  outline-offset: 2px;
+}
+
+.site-header .nav-cta-btn span {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #121212;
+  line-height: 1;
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow-wrap: normal;
+}
+
+.site-header .nav-cta-btn::before,
+.site-header .nav-cta-btn::after {
+  display: none !important;
+  content: none !important;
 }
 
 /* Mobile Toggle */
@@ -1264,34 +1317,37 @@ button, input, select, textarea {
   }
 
   /* ==========================================================================
-     1. HEADER MOBILE: FLEXBOX SPACE-BETWEEN, CIRCULAR ICON CTA (ZERO OVERLAP)
+     1. HEADER MOBILE: ALINHAMENTO EQUILIBRADO E BOTÃO RETANGULAR "AGENDAR"
      ========================================================================== */
   .nav-container {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     height: 68px !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding-left: clamp(10px, 3vw, 20px) !important;
+    padding-right: clamp(10px, 3vw, 20px) !important;
     position: relative !important;
     box-sizing: border-box !important;
     width: 100% !important;
+    gap: 8px !important;
   }
 
   .header-left-col {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    width: 44px !important;
+    flex: 1 1 0% !important;
+    min-width: 44px !important;
     flex-shrink: 0 !important;
     z-index: 10 !important;
   }
 
   .mobile-toggle {
     display: flex !important;
+    flex-shrink: 0 !important;
   }
 
-  /* Logo: In normal flex flow, centered, never touches buttons */
+  /* Logo: Proporcional e visualmente centralizada, sem risco de sobreposição */
   .brand-logo {
     position: static !important;
     transform: none !important;
@@ -1299,56 +1355,90 @@ button, input, select, textarea {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    flex: 1 !important;
-    min-width: 0 !important;
-    max-width: calc(100% - 96px) !important;
+    flex: 0 0 auto !important;
     margin: 0 auto !important;
     text-align: center !important;
+    max-width: 130px !important;
+    padding: 0 4px !important;
+    box-sizing: border-box !important;
   }
 
   .brand-logo-img {
-    height: 38px !important;
-    max-width: 140px !important;
+    height: clamp(30px, 7.5vw, 36px) !important;
+    max-width: clamp(96px, 28vw, 126px) !important;
     width: auto !important;
     object-fit: contain !important;
     margin: 0 auto !important;
+    display: block !important;
   }
 
   .header-right-col {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    width: 44px !important;
+    flex: 1 1 0% !important;
+    width: auto !important;
+    min-width: 44px !important;
     flex-shrink: 0 !important;
     z-index: 10 !important;
   }
 
-  /* Mobile CTA: Circular WhatsApp Icon Button to free space for logo */
-  .nav-cta-btn {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
+  /* Mobile CTA: Formato retangular com cantos arredondados, fundo dourado sólido e texto escuro */
+  .site-header .nav-cta-btn {
+    width: auto !important;
+    min-width: unset !important;
+    max-width: unset !important;
+    height: auto !important;
+    min-height: 44px !important;
+    padding: 0 16px !important;
+    border-radius: 8px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    box-shadow: var(--gold-shadow) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+    background: #C5A059 !important;
+    background-color: #C5A059 !important;
+    background-image: none !important;
+    color: #121212 !important;
+    border: 1px solid #B58F48 !important;
+    box-shadow: 0 2px 8px rgba(197, 160, 89, 0.22) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
     box-sizing: border-box !important;
+    cursor: pointer !important;
   }
 
-  .nav-cta-btn span,
-  .nav-cta-btn::after {
+  .site-header .nav-cta-btn:hover {
+    background-color: #B58F48 !important;
+    color: #121212 !important;
+  }
+
+  .site-header .nav-cta-btn:focus-visible {
+    outline: 2px solid #8F6D28 !important;
+    outline-offset: 2px !important;
+  }
+
+  .site-header .nav-cta-btn span {
+    display: inline-block !important;
+    font-family: var(--font-sans) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #121212 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  .site-header .nav-cta-btn::before,
+  .site-header .nav-cta-btn::after {
     display: none !important;
     content: none !important;
-  }
-
-  .nav-cta-btn .btn-icon {
-    width: 20px !important;
-    height: 20px !important;
-    margin: 0 !important;
-    display: block !important;
   }
 
   /* Drawer Navigation */
