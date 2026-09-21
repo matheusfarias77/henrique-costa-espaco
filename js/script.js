@@ -211,21 +211,95 @@ Como podemos confirmar o melhor horário?`;
   }
 
   /* --------------------------------------------------------------------------
-     7. SCROLL REVEAL (DISCREET EDITORIAL MICROINTERACTIONS)
+     7. TOUCH FEEDBACK ENHANCEMENT (NATIVE iOS SAFARI :active SUPPORT)
      -------------------------------------------------------------------------- */
-  const revealElements = document.querySelectorAll('.reveal-on-scroll');
-  if ('IntersectionObserver' in window && revealElements.length > 0) {
+  document.addEventListener('touchstart', () => {}, { passive: true });
+
+  /* --------------------------------------------------------------------------
+     8. ACCESSIBILITY: REVEAL IMMEDIATELY ON KEYBOARD FOCUS
+     -------------------------------------------------------------------------- */
+  document.addEventListener('focusin', (e) => {
+    const target = e.target.closest('.reveal-on-scroll, .reveal-photo');
+    if (target && !target.classList.contains('is-revealed')) {
+      target.style.transitionDelay = '0ms';
+      target.classList.add('is-revealed');
+    }
+  });
+
+  /* --------------------------------------------------------------------------
+     9. SCROLL REVEAL (MOBILE MICROINTERACTIONS WITH GROUP STAGGER)
+     -------------------------------------------------------------------------- */
+  const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-photo');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReduced) {
+    revealElements.forEach((el) => el.classList.add('is-revealed'));
+  } else if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const isMobileViewport = () => window.innerWidth <= 768;
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const toReveal = [];
+
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) return;
+
+        const rect = entry.boundingClientRect;
+        const isTallerThanViewport = rect.height > windowHeight;
+
+        // Condition:
+        // - Taller elements: trigger when top enters viewport (independent of proportion)
+        // - Standard elements: trigger when ~10% enters viewport or ratio >= 0.09
+        const shouldTrigger = isTallerThanViewport
+          ? (rect.top < windowHeight - 20 && rect.bottom > 20)
+          : (entry.intersectionRatio >= 0.09 || rect.top <= windowHeight - Math.min(rect.height * 0.1, 40));
+
+        if (shouldTrigger) {
+          toReveal.push(entry);
+        }
+      });
+
+      if (toReveal.length === 0) return;
+
+      // Sort top-to-bottom so elements reveal in natural reading sequence
+      toReveal.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+      const isMobile = isMobileViewport();
+
+      toReveal.forEach((entry, index) => {
+        const el = entry.target;
+        observer.unobserve(el);
+
+        if (isMobile) {
+          // Stagger sequence: 80ms interval, capped at 240ms total delay
+          const delay = Math.min(index * 80, 240);
+          if (delay > 0) {
+            el.style.transitionDelay = `${delay}ms`;
+          }
+
+          el.classList.add('is-revealed');
+
+          // Clear delay after animation ends so button/card interactions aren't delayed
+          const clearDelay = () => {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', onTransitionEnd);
+          };
+          const onTransitionEnd = (evt) => {
+            if (evt.target === el && (evt.propertyName === 'opacity' || evt.propertyName === 'transform')) {
+              clearDelay();
+            }
+          };
+          el.addEventListener('transitionend', onTransitionEnd);
+          setTimeout(clearDelay, delay + 650);
+        } else {
+          // Desktop: reveal immediately without mobile stagger delay
+          el.classList.add('is-revealed');
         }
       });
     }, {
       root: null,
-      threshold: 0.08,
-      rootMargin: '0px 0px -30px 0px'
+      threshold: [0, 0.08, 0.1, 0.2],
+      rootMargin: '0px 0px -10px 0px'
     });
 
     revealElements.forEach((el) => revealObserver.observe(el));

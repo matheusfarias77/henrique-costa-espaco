@@ -1418,6 +1418,37 @@ button, input, select, textarea {
   transform: translateY(0);
 }
 
+/* Fallback caso JavaScript falhe ou esteja desabilitado */
+html:not(.js-enabled) .reveal-on-scroll,
+html:not(.js-enabled) .reveal-photo {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Revelar imediatamente elementos com foco ativo para acessibilidade */
+.reveal-on-scroll:focus-within,
+.reveal-photo:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Fotos autorais abaixo da hero no desktop: sem distorção ou saltos */
+@media (min-width: 769px) {
+  .reveal-photo {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-photo.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-content,
   .hero-text .eyebrow-tag,
@@ -1425,7 +1456,14 @@ button, input, select, textarea {
   .hero-subtitle,
   .hero-actions,
   .hero-trust-row,
-  .reveal-on-scroll {
+  .reveal-on-scroll,
+  .reveal-photo,
+  .btn-gold,
+  .btn-gold-outline,
+  .btn-form-submit,
+  .nav-cta-btn,
+  .service-card-action,
+  .floating-whatsapp-btn {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
@@ -1705,6 +1743,16 @@ button, input, select, textarea {
     box-sizing: border-box !important;
     cursor: pointer !important;
     transform: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    transition: transform 180ms ease-out, background-color 180ms ease-out, color 180ms ease-out !important;
+  }
+
+  .site-header .nav-cta-btn:active {
+    transform: scale(0.96) !important;
+    background-color: #DDD2B8 !important;
+    color: #2F281C !important;
+    transition: transform 70ms ease-out, background-color 70ms ease-out !important;
   }
 
   .site-header .nav-cta-btn:hover {
@@ -1918,6 +1966,25 @@ button, input, select, textarea {
     align-items: center !important;
     justify-content: center !important;
     gap: 0.5rem !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    transition: transform 180ms ease-out, background-color 180ms ease-out, background 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out, box-shadow 180ms ease-out !important;
+  }
+
+  .btn-gold:active,
+  .btn-form-submit:active {
+    transform: scale(0.96) !important;
+    background: linear-gradient(135deg, #A88138 0%, #8A6524 100%) !important;
+    box-shadow: 0 2px 8px rgba(168, 129, 56, 0.4) !important;
+    transition: transform 70ms ease-out, background 70ms ease-out, box-shadow 70ms ease-out !important;
+  }
+
+  .btn-gold-outline:active {
+    transform: scale(0.96) !important;
+    background-color: rgba(197, 160, 89, 0.14) !important;
+    border-color: var(--gold-dark) !important;
+    color: var(--gold-dark) !important;
+    transition: transform 70ms ease-out, background-color 70ms ease-out, border-color 70ms ease-out !important;
   }
 
   .btn-gold span,
@@ -2157,6 +2224,17 @@ button, input, select, textarea {
   .service-card-action {
     font-size: 0.9375rem !important;
     min-height: 44px !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    transition: transform 180ms ease-out, color 180ms ease-out, background-color 180ms ease-out !important;
+  }
+
+  .service-card-action:active {
+    transform: scale(0.96) !important;
+    color: #6E5320 !important;
+    background-color: rgba(197, 160, 89, 0.12) !important;
+    border-radius: 6px !important;
+    transition: transform 70ms ease-out, color 70ms ease-out, background-color 70ms ease-out !important;
   }
 
   .services-cta-banner {
@@ -2282,6 +2360,16 @@ button, input, select, textarea {
   .floating-whatsapp-btn {
     width: 50px !important;
     height: 50px !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    transition: transform 180ms ease-out, background 180ms ease-out, box-shadow 180ms ease-out !important;
+  }
+
+  .floating-whatsapp-btn:active {
+    transform: scale(0.96) !important;
+    background: #1EBE5B !important;
+    box-shadow: 0 4px 12px rgba(30, 190, 91, 0.4) !important;
+    transition: transform 70ms ease-out, background 70ms ease-out, box-shadow 70ms ease-out !important;
   }
 
   /* Rodapé Mobile */
@@ -2293,5 +2381,33 @@ button, input, select, textarea {
     font-size: 0.82rem !important;
     line-height: 1.55 !important;
     padding: 0 0.5rem !important;
+  }
+
+  /* ==========================================================================
+     SCROLL REVEAL MOBILE (MICROINTERAÇÕES REFORÇADAS: 20px / 550ms ease-out)
+     ========================================================================== */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 550ms ease-out, transform 550ms ease-out;
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fotos autorais abaixo da hero no mobile: fade-in combinado com scale(0.97) -> scale(1) */
+  .reveal-photo {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    transition: opacity 550ms ease-out, transform 550ms ease-out;
+    will-change: opacity, transform;
+  }
+
+  .reveal-photo.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
