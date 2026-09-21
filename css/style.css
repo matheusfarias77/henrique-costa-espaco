@@ -1022,17 +1022,43 @@ button, input, select, textarea {
   transform: scale(1.04);
 }
 
+/* Enquadramento individual preservando topo da cabeça e comprimento */
+.gallery-img-1 {
+  object-position: 50% 18%;
+}
+
+.gallery-img-2 {
+  object-position: 50% 15%;
+}
+
+.gallery-img-3 {
+  object-position: 50% 24%;
+}
+
+.gallery-img-4 {
+  object-position: 50% 16%;
+}
+
+.gallery-img-5 {
+  object-position: 50% 18%;
+}
+
+.gallery-img-6 {
+  object-position: 50% 16%;
+}
+
 .gallery-caption-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem 1.25rem 1rem;
-  background: linear-gradient(180deg, transparent 20%, rgba(18, 18, 18, 0.9) 100%);
+  padding: 2.2rem 1.25rem 1rem;
+  background: linear-gradient(to top, rgba(16, 14, 12, 0.88) 0%, rgba(16, 14, 12, 0.42) 60%, transparent 100%);
   color: #FFFFFF;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
 }
 
 .gallery-square-card:hover .gallery-caption-overlay {
@@ -1044,13 +1070,21 @@ button, input, select, textarea {
   font-family: var(--font-serif);
   font-size: 1.05rem;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  line-height: 1.25;
+  color: #FFFFFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .gallery-caption-sub {
   font-size: 0.78rem;
   color: #E2E2E2;
   letter-spacing: 0.02em;
+  display: none;
 }
 
 /* ==========================================================================
@@ -2322,20 +2356,35 @@ html:not(.js-enabled) .authority-diamond {
   .gallery-caption-overlay {
     opacity: 1 !important;
     transform: translateY(0) !important;
-    padding: 0.75rem 0.5rem 0.5rem !important;
+    padding: 1.6rem 0.65rem 0.6rem !important;
+    background: linear-gradient(to top, rgba(16, 14, 12, 0.9) 0%, rgba(16, 14, 12, 0.45) 65%, transparent 100%) !important;
   }
 
   .gallery-caption-title {
-    font-size: 0.82rem !important;
+    font-size: 0.85rem !important;
+    line-height: 1.25 !important;
     white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    margin-bottom: 0 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
   }
 
   .gallery-caption-sub {
-    font-size: 0.68rem !important;
     display: none !important;
   }
+
+  /* Enquadramentos responsivos individuais mobile */
+  .gallery-img-1 { object-position: 50% 16% !important; }
+  .gallery-img-2 { object-position: 50% 14% !important; }
+  .gallery-img-3 { object-position: 50% 22% !important; }
+  .gallery-img-4 { object-position: 50% 14% !important; }
+  .gallery-img-5 { object-position: 50% 16% !important; }
+  .gallery-img-6 { object-position: 50% 16% !important; }
 
   /* Form Mobile (100% Width Fields) */
   .booking-wrapper {
