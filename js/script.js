@@ -96,7 +96,61 @@ Como podemos confirmar o melhor horário?`;
   }
 
   /* --------------------------------------------------------------------------
-     4. ACTIVE LINK HIGHLIGHT ON SCROLL
+     4. SERVICE CATALOG CARDS -> SELECT IN FORM & SMOOTH NAVIGATION
+     -------------------------------------------------------------------------- */
+  const serviceActionLinks = document.querySelectorAll('.service-card-action');
+  const bookingServiceSelect = document.getElementById('bookingService');
+  const bookingSection = document.getElementById('agendamento');
+
+  if (serviceActionLinks.length > 0 && bookingServiceSelect && bookingSection) {
+    serviceActionLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const serviceName = link.getAttribute('data-service');
+
+        // 1. Select matching option in existing form without creating duplicates
+        if (serviceName) {
+          const optionExists = Array.from(bookingServiceSelect.options).some(
+            (opt) => opt.value === serviceName
+          );
+          if (optionExists) {
+            bookingServiceSelect.value = serviceName;
+            bookingServiceSelect.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+
+        // 2. Smoothly scroll to the booking section accounting for fixed header height
+        const headerEl = document.querySelector('.site-header');
+        const headerHeight = headerEl ? headerEl.offsetHeight : 70;
+        const targetElement = document.querySelector('.booking-wrapper') || bookingSection;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - (headerHeight + 20);
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReducedMotion) {
+          window.scrollTo(0, targetPosition);
+        } else {
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+          });
+        }
+
+        // 3. Keep URL updated without causing jump
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, '', '#agendamento');
+        }
+
+        // 4. Focus the service select without auto-submitting or clearing other fields
+        setTimeout(() => {
+          bookingServiceSelect.focus({ preventScroll: true });
+        }, prefersReducedMotion ? 40 : 450);
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     5. ACTIVE LINK HIGHLIGHT ON SCROLL
      -------------------------------------------------------------------------- */
   const sections = document.querySelectorAll('section[id]');
   if ('IntersectionObserver' in window && sections.length > 0) {
@@ -125,7 +179,7 @@ Como podemos confirmar o melhor horário?`;
   }
 
   /* --------------------------------------------------------------------------
-     5. FAQ ACCORDION (ACCESSIBLE, ARIA-EXPANDED, KEYBOARD FRIENDLY)
+     6. FAQ ACCORDION (ACCESSIBLE, ARIA-EXPANDED, KEYBOARD FRIENDLY)
      -------------------------------------------------------------------------- */
   const faqTriggers = document.querySelectorAll('.faq-trigger');
   if (faqTriggers.length > 0) {
@@ -157,7 +211,7 @@ Como podemos confirmar o melhor horário?`;
   }
 
   /* --------------------------------------------------------------------------
-     6. SCROLL REVEAL (DISCREET EDITORIAL MICROINTERACTIONS)
+     7. SCROLL REVEAL (DISCREET EDITORIAL MICROINTERACTIONS)
      -------------------------------------------------------------------------- */
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   if ('IntersectionObserver' in window && revealElements.length > 0) {

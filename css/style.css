@@ -768,115 +768,130 @@ button, input, select, textarea {
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.services-section .section-header-center {
+  margin-bottom: 2.25rem;
+}
+
+.services-section .section-header-center .hairline {
+  margin: 0.85rem auto 1rem auto;
+}
+
 .services-text-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
-  margin-bottom: 3.5rem;
+  gap: 20px;
+  margin-bottom: 2.75rem;
   align-items: stretch;
 }
 
 .service-text-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-card);
+  background: #F8F6F1;
+  border: 1px solid #E5DFD2;
   border-radius: 12px;
-  padding: 2.1rem 1.9rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+  padding: 28px;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  height: auto;
+  min-height: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .service-text-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(197, 160, 89, 0.45);
-  box-shadow: 0 10px 28px rgba(197, 160, 89, 0.08);
+  border-color: #C8BDAB;
+  box-shadow: 0 4px 14px rgba(45, 38, 28, 0.04);
 }
 
-.service-card-top {
+.service-card-body {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.65rem;
-}
-
-.service-number {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--gold-dark);
-  letter-spacing: 0.2em;
-}
-
-.service-card-badge {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  background: rgba(197, 160, 89, 0.1);
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-pill);
-  white-space: normal;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-bottom: 16px;
 }
 
 .service-card-title {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: 1.625rem;
   font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.3;
-  margin-top: 0.25rem;
-}
-
-.service-card-desc {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-top: 0.65rem;
-  margin-bottom: 1.75rem;
-  flex-grow: 1;
-}
-
-.service-card-footer {
-  border-top: 1px solid rgba(197, 160, 89, 0.16);
-  padding-top: 1.15rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  font-size: 0.82rem;
-  flex-wrap: wrap;
-}
-
-.service-card-detail {
-  color: var(--text-light);
-  font-size: 0.78rem;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-}
-
-.service-card-link {
-  color: var(--gold-dark);
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: gap var(--transition-fast), color var(--transition-fast);
+  color: #26231E;
+  line-height: 1.25;
+  margin: 0 0 10px 0;
   white-space: normal;
   word-wrap: break-word;
 }
 
-.service-card-link:hover {
-  color: var(--gold-hover);
-  gap: 0.6rem;
+.service-card-desc {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: #3E382F;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  flex-grow: 1;
+}
+
+.service-card-detail {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #726A5F;
+  margin: 14px 0 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #ECE5D8;
+  letter-spacing: 0.01em;
+}
+
+.service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+.service-card-action {
+  color: #7A5C20;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 4px 0;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, gap 0.2s ease;
+  outline: none;
+}
+
+.service-card-action .action-arrow {
+  display: inline-block;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.service-card-action:hover {
+  color: #553E12;
+  gap: 12px;
+}
+
+.service-card-action:hover .action-arrow {
+  transform: translateX(3px);
+}
+
+.service-card-action:focus-visible {
+  outline: 2px solid #7A5C20;
+  outline-offset: 4px;
+  border-radius: 4px;
+  color: #553E12;
 }
 
 .service-full-span {
@@ -987,6 +1002,7 @@ button, input, select, textarea {
   background: var(--bg-white);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
+  scroll-margin-top: 90px;
 }
 
 .booking-wrapper {
@@ -1434,29 +1450,27 @@ button, input, select, textarea {
     height: 480px;
   }
 
-  /* 3. Serviços: 2 colunas com card 07 balanceado e banner horizontal panorâmico */
+  /* 3. Serviços: 2 colunas com card 07 centralizado e harmonioso */
+  .services-section .section-header-center {
+    margin-bottom: 2.5rem;
+  }
+
   .services-text-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
     margin-bottom: 2.75rem;
   }
 
-  .service-full-span {
-    display: grid !important;
-    grid-template-columns: 1.25fr 0.75fr;
-    align-items: center;
-    gap: 2.5rem;
-    padding: 2.25rem 2.5rem;
+  .service-text-card {
+    padding: 28px;
   }
 
-  .service-full-span .service-card-footer {
-    border-top: none;
-    border-left: 1px solid rgba(197, 160, 89, 0.2);
-    padding-top: 0;
-    padding-left: 2rem;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1.15rem;
-    height: 100%;
+  .service-full-span {
+    grid-column: 1 / -1;
+    max-width: 580px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .services-cta-banner {
@@ -2040,59 +2054,77 @@ button, input, select, textarea {
     box-sizing: border-box !important;
   }
 
-  /* Services Cards */
+  /* Services Cards (Mobile 1 Coluna Compacta) */
+  .services-section .section-header-center {
+    margin-bottom: 1.65rem !important;
+  }
+
+  .services-section .hairline {
+    margin: 0.65rem auto 0.85rem auto !important;
+  }
+
   .services-text-grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 24px !important;
+    gap: 18px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    margin-bottom: 2rem !important;
   }
 
   .service-full-span {
     grid-column: 1 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
   }
 
   .service-text-card {
     width: 100% !important;
     box-sizing: border-box !important;
-    padding: 1.5rem 1.25rem !important;
+    padding: 22px !important;
     height: auto !important;
     min-height: unset !important;
   }
 
   .service-card-title {
-    font-size: 1.15rem !important;
+    font-size: clamp(1.5rem, 5.8vw, 1.75rem) !important; /* 24px - 28px */
+    line-height: 1.25 !important;
+    margin: 0 0 10px 0 !important;
     white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }
 
   .service-card-desc {
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+    color: #3E382F !important;
     white-space: normal !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }
 
+  .service-card-detail {
+    font-size: 13.5px !important;
+    line-height: 1.45 !important;
+    color: #726A5F !important;
+    margin: 12px 0 0 0 !important;
+    padding-top: 10px !important;
+  }
+
   .service-card-footer {
     display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.65rem !important;
-    padding-top: 1rem !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-top: 4px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
-  .service-card-detail {
-    font-size: 0.76rem !important;
-    line-height: 1.4 !important;
-    color: var(--text-light) !important;
-  }
-
-  .service-card-link {
-    font-size: 0.82rem !important;
-    letter-spacing: 0.04em !important;
+  .service-card-action {
+    font-size: 0.9375rem !important;
+    min-height: 44px !important;
   }
 
   .services-cta-banner {
