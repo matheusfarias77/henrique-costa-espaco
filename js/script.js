@@ -13,13 +13,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const WHATSAPP_PHONE = '5521988286774';
 
   /* --------------------------------------------------------------------------
-     1. STICKY HEADER SCROLL SHADOW
+     1. STICKY HEADER SCROLL SHADOW & SUBTLE HERO PARALLAX
      -------------------------------------------------------------------------- */
+  const heroImg = document.querySelector('.hero-bg-img');
+  const heroSection = document.querySelector('.hero-section');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const handleScroll = () => {
-    if (window.scrollY > 30) {
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollY > 30) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
+    }
+
+    // Parallax extremamente sutil na Hero (apenas desktop e com movimento permitido)
+    if (heroImg && heroSection && !prefersReduced && window.innerWidth > 768) {
+      const heroHeight = heroSection.offsetHeight || 650;
+      if (scrollY <= heroHeight) {
+        const translateY = Math.min(scrollY * 0.08, 18);
+        heroImg.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      }
     }
   };
   window.addEventListener('scroll', handleScroll, { passive: true });
@@ -230,7 +244,6 @@ Como podemos confirmar o melhor horário?`;
      9. SCROLL REVEAL (MOBILE MICROINTERACTIONS WITH GROUP STAGGER)
      -------------------------------------------------------------------------- */
   const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-photo');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (prefersReduced) {
     revealElements.forEach((el) => el.classList.add('is-revealed'));
