@@ -593,7 +593,7 @@ button, input, select, textarea {
 
 /* ==========================================================================
 /* ==========================================================================
-   FAIXA DE AUTORIDADE (3 DESTAQUES - COMPOSIÇÃO EDITORIAL ALINHADA)
+   FAIXA EDITORIAL (ESTILO · CUIDADO · BELEZA)
    ========================================================================== */
 .authority-strip {
   background-color: #FFFFFF;
@@ -614,56 +614,38 @@ button, input, select, textarea {
 .authority-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: stretch;
+  align-items: center;
   width: 100%;
   box-sizing: border-box;
 }
 
 .authority-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   text-align: center;
-  padding: 0 clamp(6px, 2vw, 8px);
+  padding: 4px 8px;
   box-sizing: border-box;
+  background: transparent;
+  box-shadow: none;
+  border: none;
 }
 
 .authority-item-divider {
-  border-left: 1px solid #EAE3D5;
-  border-right: 1px solid #EAE3D5;
+  border-left: 1px solid rgba(197, 160, 89, 0.38);
+  border-right: 1px solid rgba(197, 160, 89, 0.38);
 }
 
-.authority-val {
-  display: block;
+.authority-word {
   font-family: var(--font-serif);
-  font-size: clamp(18px, 4.8vw, 20px);
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
   color: var(--text-primary);
   line-height: 1.2;
-  min-height: calc(2 * 1.2em);
-  letter-spacing: -0.01em;
   text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
   margin: 0;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.authority-label {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: clamp(12px, 3.2vw, 13px);
-  font-weight: 400;
-  color: #554F44;
-  line-height: 1.45;
-  margin-top: 8px;
-  text-align: center;
-  text-transform: none;
-  letter-spacing: 0;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 /* ==========================================================================
@@ -1456,9 +1438,9 @@ button, input, select, textarea {
    Reduz vazios excessivos, aproveita colunas e equilibra proporções
    ========================================================================== */
 @media (min-width: 1024px) {
-  /* 0. Faixa de Autoridade: Proporções ampliadas e alinhamento no Desktop */
+  /* 0. Faixa Editorial: 28px no Desktop e proporções elegantes */
   .authority-strip {
-    padding: 30px 0;
+    padding: 28px 0;
   }
 
   .authority-strip .container {
@@ -1467,19 +1449,12 @@ button, input, select, textarea {
   }
 
   .authority-item {
-    padding: 0 24px;
+    padding: 6px 24px;
   }
 
-  .authority-val {
-    font-size: 1.45rem;
+  .authority-word {
+    font-size: 28px;
     line-height: 1.2;
-    min-height: calc(2 * 1.2em);
-  }
-
-  .authority-label {
-    font-size: 0.875rem;
-    line-height: 1.45;
-    margin-top: 8px;
   }
 
   /* 1. Spacing vertical entre seções mais equilibrado e editorial */
@@ -1964,7 +1939,7 @@ button, input, select, textarea {
      5. CARDS: 1 COLUNA, 100% LARGURA, 24px GAP, HEIGHT AUTO
      ========================================================================== */
 
-  /* Faixa de Autoridade no Mobile (3 Colunas Lado a Lado, Alinhadas e Espaçadas) */
+  /* Faixa Editorial no Mobile (Estilo | Cuidado | Beleza) */
   .authority-strip {
     padding: 24px 0 !important;
     background-color: #FFFFFF !important;
@@ -1975,57 +1950,51 @@ button, input, select, textarea {
   }
 
   .authority-strip .container {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 
   .authority-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 0 !important;
-    align-items: stretch !important;
+    align-items: center !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
   .authority-item {
     display: flex !important;
-    flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     text-align: center !important;
-    padding: 0 clamp(6px, 2vw, 8px) !important;
+    padding: 4px 6px !important;
     box-sizing: border-box !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
   .authority-item-divider {
-    border-left: 1px solid #EAE3D5 !important;
-    border-right: 1px solid #EAE3D5 !important;
+    border-left: 1px solid rgba(197, 160, 89, 0.38) !important;
+    border-right: 1px solid rgba(197, 160, 89, 0.38) !important;
   }
 
-  .authority-val {
-    font-size: clamp(18px, 4.8vw, 20px) !important;
-    font-weight: 600 !important;
-    line-height: 1.2 !important;
-    min-height: calc(2 * 1.2em) !important;
+  .authority-word {
+    font-family: var(--font-serif) !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
     color: var(--text-primary) !important;
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.02em !important;
     margin: 0 !important;
   }
 
-  .authority-label {
-    font-size: clamp(12px, 3.2vw, 13px) !important;
-    color: #554F44 !important;
-    text-transform: none !important;
-    letter-spacing: 0 !important;
-    line-height: 1.45 !important;
-    margin-top: 8px !important;
-    font-weight: 400 !important;
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
+  /* Redução do espaço entre essa faixa e a foto seguinte no mobile (~32px) */
+  .about-section {
+    padding-top: 32px !important;
   }
 
   /* 3 Diferenciais: Lista Editorial Leve no Mobile */
